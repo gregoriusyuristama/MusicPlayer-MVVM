@@ -21,7 +21,7 @@ class MusicListRepository: MusicListRepositoryProtocol {
                 return Fail(error: error).eraseToAnyPublisher()
             })
             .map( { musicResponse in
-                musicResponse.results.map { music in
+                musicResponse.results.compactMap { music in
                     music.toMusic()
                 }
             })

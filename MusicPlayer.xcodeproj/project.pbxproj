@@ -26,6 +26,8 @@
 		B623DD112BE5272900627D39 /* DispatchQueue+AsyncDeduped.swift in Sources */ = {isa = PBXBuildFile; fileRef = B623DD102BE5272900627D39 /* DispatchQueue+AsyncDeduped.swift */; };
 		B623DD1F2BE5401700627D39 /* LoadingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B623DD1E2BE5401700627D39 /* LoadingManager.swift */; };
 		B623DD212BE5407200627D39 /* UIAppplication+keyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B623DD202BE5407200627D39 /* UIAppplication+keyWindow.swift */; };
+		B6469D2D2BE54E6F005DD431 /* AudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */; };
+		B6469D2F2BE555FC005DD431 /* MusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		B623DD102BE5272900627D39 /* DispatchQueue+AsyncDeduped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+AsyncDeduped.swift"; sourceTree = "<group>"; };
 		B623DD1E2BE5401700627D39 /* LoadingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingManager.swift; sourceTree = "<group>"; };
 		B623DD202BE5407200627D39 /* UIAppplication+keyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAppplication+keyWindow.swift"; sourceTree = "<group>"; };
+		B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
+		B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,7 @@
 		B623DCF02BE5013D00627D39 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				B6469D2B2BE54E50005DD431 /* AudioPlayer */,
 				B623DD1D2BE5401000627D39 /* LoadingManager */,
 				B623DD0F2BE5130D00627D39 /* MusicService */,
 			);
@@ -290,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				B623DD0D2BE5129800627D39 /* MusicTableViewCell.swift */,
+				B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -315,6 +321,14 @@
 				B623DD1E2BE5401700627D39 /* LoadingManager.swift */,
 			);
 			path = LoadingManager;
+			sourceTree = "<group>";
+		};
+		B6469D2B2BE54E50005DD431 /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */,
+			);
+			path = AudioPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,6 +462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B623DD112BE5272900627D39 /* DispatchQueue+AsyncDeduped.swift in Sources */,
+				B6469D2D2BE54E6F005DD431 /* AudioPlayerManager.swift in Sources */,
 				B623DCFC2BE5085E00627D39 /* ItunesService.swift in Sources */,
 				B623DCC12BE4FA7000627D39 /* MusicListViewController.swift in Sources */,
 				B623DCF82BE5074300627D39 /* MusicModel.swift in Sources */,
@@ -455,6 +470,7 @@
 				B623DD212BE5407200627D39 /* UIAppplication+keyWindow.swift in Sources */,
 				B623DD1F2BE5401700627D39 /* LoadingManager.swift in Sources */,
 				B623DCBD2BE4FA7000627D39 /* AppDelegate.swift in Sources */,
+				B6469D2F2BE555FC005DD431 /* MusicPlayerView.swift in Sources */,
 				B623DCBF2BE4FA7000627D39 /* SceneDelegate.swift in Sources */,
 				B623DD062BE50C2500627D39 /* MusicListViewModel.swift in Sources */,
 				B623DD0A2BE50E1100627D39 /* MusicListRepository.swift in Sources */,

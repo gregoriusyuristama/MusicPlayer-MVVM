@@ -7,6 +7,7 @@
 import Foundation
 
 // MARK: MusicModel
+/// Model that represent all the field that retrieve from API calls
 struct MusicModel: Decodable {
     let wrapperType: String?
     let kind: String?
@@ -16,7 +17,7 @@ struct MusicModel: Decodable {
     let collectionArtistID: Int?
     let collectionArtistName: String?
     let artistViewURL, collectionViewURL, trackViewURL: String?
-    let previewURL: String?
+    let previewUrl: String?
     let artworkUrl30: String?
     let artworkUrl60, artworkUrl100: String?
     let collectionPrice: Double?
@@ -43,7 +44,10 @@ struct MusicModel: Decodable {
 // MARK: Convert to Music on presentation
 extension MusicModel {
     func toMusic() -> Music {
-        let music = Music(songName: self.trackName ?? "No Track Name", artistName: self.artistName ?? "No Artist Name")
-        return music
+        return Music(
+            songName: self.trackName ?? "No Track Name",
+            artistName: self.artistName ?? "No Artist Name",
+            audioUrl: URL(string: self.previewUrl ?? "")
+        )
     }
 }

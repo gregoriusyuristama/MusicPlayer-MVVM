@@ -28,6 +28,8 @@ class MusicListViewController: UIViewController {
     }()
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     
+    fileprivate var musicPlayerView: MusicPlayerView!
+    
     fileprivate let viewModel = MusicListViewModel()
     fileprivate let input: PassthroughSubject<MusicListViewModel.Input, Never> = .init()
     fileprivate var cancellables = Set<AnyCancellable>()
@@ -41,10 +43,13 @@ class MusicListViewController: UIViewController {
     }
     
     fileprivate func initView() {
+        musicPlayerView = MusicPlayerView(frame: CGRect(x: 0, y: view.frame.height - 200, width: view.frame.width, height: 200))
+        
         view.backgroundColor = .systemBackground
         
         view.addSubview(tableView)
         view.addSubview(informationLabel)
+        view.addSubview(musicPlayerView)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -53,14 +58,12 @@ class MusicListViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
+            tableView.bottomAnchor.constraint(equalTo: musicPlayerView.topAnchor),
+            
             informationLabel.topAnchor.constraint(equalTo: view.topAnchor),
             informationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             informationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            informationLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            informationLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
         self.initNavBar()
@@ -120,7 +123,9 @@ class MusicListViewController: UIViewController {
             .sink { [weak self] event in
                 switch event {
                 case .fetchMusicListDidSucceed(let musicList):
+                    //                    debugPrint(musicList)
                     self?.updateTableView(with: musicList)
+                    AudioPlayerManager.shared.tracks = musicList
                 case .fetchMusicListDidFail(let error):
                     debugPrint(error)
                     self?.updateViewWithError(errorMessage: error.localizedDescription)
@@ -146,6 +151,12 @@ extension MusicListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.config(self.musicList[indexPath.row])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.searchController.isActive = false
+        AudioPlayerManager.shared.currentTrackIndex = indexPath.row
+        AudioPlayerManager.shared.playCurrentTrack()
     }
     
     
