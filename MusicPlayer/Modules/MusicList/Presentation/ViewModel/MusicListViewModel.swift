@@ -28,15 +28,18 @@ class MusicListViewModel {
     }
     
     func handleSearchTrackName(trackName: String) {
-        output.send(.toggleSearch(isEnabled: false))
+        output.send(.toggleSearch(isSearching: true))
         musicListRepository.getMusicListFromTrackName(trackName: trackName).sink { [weak self] completion in
-            self?.output.send(.toggleSearch(isEnabled: true))
+            self?.output.send(.toggleSearch(isSearching: false))
             if case .failure(let error) = completion {
-                self?.output.send(.fetchMusicListDidFail(error: error))
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: { [weak self] in
+                    self?.output.send(.fetchMusicListDidFail(error: error))
+                })
             }
         } receiveValue: { [weak self] musicList in
             self?.output.send(.fetchMusicListDidSucceed(musicList: musicList))
         }.store(in: &cancellables)
+        
 
     }
     
@@ -54,6 +57,6 @@ extension MusicListViewModel {
     enum Output {
         case fetchMusicListDidFail(error: Error)
         case fetchMusicListDidSucceed(musicList: [Music])
-        case toggleSearch(isEnabled: Bool)
+        case toggleSearch(isSearching: Bool)
     }
 }

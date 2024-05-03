@@ -9,11 +9,22 @@ import UIKit
 import Combine
 
 class MusicListViewController: UIViewController {
-
     fileprivate let tableView: UITableView = {
         let table = UITableView()
         table.register(MusicTableViewCell.self, forCellReuseIdentifier: MusicTableViewCell.identifier)
+        table.translatesAutoresizingMaskIntoConstraints = false
         return table
+    }()
+    fileprivate let informationLabel: UILabel = {
+        let label = UILabel()
+        label.lineBreakMode = .byWordWrapping
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = UIColor.gray
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.text = "No songs searched yet or no match for current song name. Please try to fill the search bar with another song name"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     
@@ -30,18 +41,28 @@ class MusicListViewController: UIViewController {
     }
     
     fileprivate func initView() {
+        view.backgroundColor = .systemBackground
+        
         view.addSubview(tableView)
+        view.addSubview(informationLabel)
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        NSLayoutConstraint.activate([
+            informationLabel.topAnchor.constraint(equalTo: view.topAnchor),
+            informationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            informationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            informationLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
         self.initNavBar()
     }
     
@@ -58,6 +79,38 @@ class MusicListViewController: UIViewController {
     fileprivate func updateTableView(with musicList: [Music]) {
         self.musicList = musicList
         tableView.reloadData()
+        if musicList.isEmpty {
+            informationLabel.text = "No songs searched yet or no match for current song name. Please try to fill the search bar with another song name"
+            self.showLabelAndHideTable()
+        } else {
+            self.showTableAndHideLabel()
+        }
+    }
+    
+    fileprivate func showLabelAndHideTable(){
+        self.informationLabel.isHidden = false
+        self.tableView.isHidden = true
+    }
+    
+    fileprivate func showTableAndHideLabel() {
+        self.informationLabel.isHidden = true
+        self.tableView.isHidden = false
+    }
+    
+    fileprivate func updateViewWhenLoading(isSearching: Bool) {
+        if isSearching {
+            LoadingManager.shared.showLoading()
+        } else {
+            LoadingManager.shared.hideLoading()
+        }
+    }
+    
+    func updateViewWithError(errorMessage: String) {
+        informationLabel.text = "ERROR: \(errorMessage)"
+        showLabelAndHideTable()
+        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     fileprivate func bind() {
@@ -69,9 +122,10 @@ class MusicListViewController: UIViewController {
                 case .fetchMusicListDidSucceed(let musicList):
                     self?.updateTableView(with: musicList)
                 case .fetchMusicListDidFail(let error):
-                    print(error)
-                case .toggleSearch(let isEnabled):
-                    print(isEnabled)
+                    debugPrint(error)
+                    self?.updateViewWithError(errorMessage: error.localizedDescription)
+                case .toggleSearch(let isSearching):
+                    self?.updateViewWhenLoading(isSearching: isSearching)
                 }
             }.store(in: &cancellables)
     }
@@ -101,7 +155,7 @@ extension MusicListViewController: UITableViewDataSource, UITableViewDelegate {
 extension MusicListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text, !searchText.isEmpty{
-            DispatchQueue.main.asyncDeduped(target: self, after: 0.7) { [weak self] in
+            DispatchQueue.main.asyncDeduped(target: self, after: 0.5) { [weak self] in
                 self?.input.send(.searchTriggered(searchText))
             }
         }

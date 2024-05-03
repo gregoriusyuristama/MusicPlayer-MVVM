@@ -15,7 +15,7 @@ class MusicListRepository: MusicListRepositoryProtocol {
         self.musicApiService = musicApiService
     }
     
-    func getMusicListFromTrackName(trackName: String) -> AnyPublisher<[Music], any Error> {
+    func getMusicListFromTrackName(trackName: String) -> AnyPublisher<[Music], Error> {
         return musicApiService.getMusicListFromTrackName(trackName: trackName)
             .catch({ error in
                 return Fail(error: error).eraseToAnyPublisher()
