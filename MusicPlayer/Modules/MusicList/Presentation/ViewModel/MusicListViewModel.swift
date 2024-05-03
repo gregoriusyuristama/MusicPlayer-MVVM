@@ -21,15 +21,15 @@ class MusicListViewModel {
         input.sink { [weak self] event in
             switch event {
             case .searchTriggered(let searchText):
-                self?.handleSearchArtistNAme(artistName: searchText)
+                self?.handleSearchTrackName(trackName: searchText)
             }
         }.store(in: &cancellables)
         return output.eraseToAnyPublisher()
     }
     
-    func handleSearchArtistNAme(artistName: String) {
+    func handleSearchTrackName(trackName: String) {
         output.send(.toggleSearch(isEnabled: false))
-        musicListRepository.getMusicListFromArtistName(artistName: artistName).sink { [weak self] completion in
+        musicListRepository.getMusicListFromTrackName(trackName: trackName).sink { [weak self] completion in
             self?.output.send(.toggleSearch(isEnabled: true))
             if case .failure(let error) = completion {
                 self?.output.send(.fetchMusicListDidFail(error: error))

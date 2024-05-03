@@ -9,12 +9,12 @@ import Foundation
 import Combine
 
 protocol ItunesServiceProtocol {
-    func getMusicListFromArtistName(artistName: String) -> AnyPublisher<MusicResponse, Error>
+    func getMusicListFromTrackName(trackName: String) -> AnyPublisher<MusicResponse, Error>
 }
 
 class ItunesService: ItunesServiceProtocol {
-    func getMusicListFromArtistName(artistName: String) -> AnyPublisher<MusicResponse, any Error> {
-        let url = URL(string: "https://itunes.apple.com/search?term=\(artistName)")!
+    func getMusicListFromTrackName(trackName: String) -> AnyPublisher<MusicResponse, any Error> {
+        let url = URL(string: "https://itunes.apple.com/search?term=\(trackName)")!
         return URLSession.shared.dataTaskPublisher(for: url)
             .catch { error in
                 return Fail(error: error).eraseToAnyPublisher()

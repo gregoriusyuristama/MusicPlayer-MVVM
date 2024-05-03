@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol MusicListRepositoryProtocol {
-    func getMusicListFromArtistName(artistName: String) -> AnyPublisher<[Music], Error>
+    func getMusicListFromTrackName(trackName: String) -> AnyPublisher<[Music], Error>
 }
