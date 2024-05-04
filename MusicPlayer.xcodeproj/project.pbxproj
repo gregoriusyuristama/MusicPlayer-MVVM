@@ -28,6 +28,8 @@
 		B62C87CD2BE637EE0021FCD3 /* MockEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C87CC2BE637EE0021FCD3 /* MockEntity.swift */; };
 		B62C87D02BE63AC90021FCD3 /* MusicListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C87CF2BE63AC90021FCD3 /* MusicListViewModelTest.swift */; };
 		B638055F2BE6C3C800157A30 /* MusicListRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638055E2BE6C3C800157A30 /* MusicListRepositoryTest.swift */; };
+		B63805622BE6C78900157A30 /* MusicServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63805612BE6C78900157A30 /* MusicServiceTest.swift */; };
+		B63805642BE6C82100157A30 /* MockMusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63805632BE6C82100157A30 /* MockMusicService.swift */; };
 		B6469D2D2BE54E6F005DD431 /* AudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */; };
 		B6469D2F2BE555FC005DD431 /* MusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */; };
 		B6469D342BE5E188005DD431 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D332BE5E188005DD431 /* ErrorManager.swift */; };
@@ -81,6 +83,8 @@
 		B62C87CC2BE637EE0021FCD3 /* MockEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEntity.swift; sourceTree = "<group>"; };
 		B62C87CF2BE63AC90021FCD3 /* MusicListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicListViewModelTest.swift; sourceTree = "<group>"; };
 		B638055E2BE6C3C800157A30 /* MusicListRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicListRepositoryTest.swift; sourceTree = "<group>"; };
+		B63805612BE6C78900157A30 /* MusicServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicServiceTest.swift; sourceTree = "<group>"; };
+		B63805632BE6C82100157A30 /* MockMusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMusicService.swift; sourceTree = "<group>"; };
 		B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
 		B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerView.swift; sourceTree = "<group>"; };
 		B6469D332BE5E188005DD431 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 				B69D16E52BE6AD7900F78622 /* Utilities */,
 				B62C87CE2BE63ABD0021FCD3 /* ViewModel */,
 				B62C87CC2BE637EE0021FCD3 /* MockEntity.swift */,
+				B63805632BE6C82100157A30 /* MockMusicService.swift */,
 			);
 			path = MusicPlayerTests;
 			sourceTree = "<group>";
@@ -361,6 +366,14 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		B63805602BE6C77600157A30 /* MusicService */ = {
+			isa = PBXGroup;
+			children = (
+				B63805612BE6C78900157A30 /* MusicServiceTest.swift */,
+			);
+			path = MusicService;
+			sourceTree = "<group>";
+		};
 		B6469D2B2BE54E50005DD431 /* AudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +410,7 @@
 		B69D16E52BE6AD7900F78622 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				B63805602BE6C77600157A30 /* MusicService */,
 				B69D16E92BE6B9A700F78622 /* ErrorManager */,
 				B69D16E62BE6AD8400F78622 /* AudioPlayer */,
 			);
@@ -588,7 +602,9 @@
 				B69D16EE2BE6BCD600F78622 /* GetMusicListFromTrackNameTest.swift in Sources */,
 				B62C87D02BE63AC90021FCD3 /* MusicListViewModelTest.swift in Sources */,
 				B69D16EB2BE6B9B400F78622 /* ErrorManagerTest.swift in Sources */,
+				B63805642BE6C82100157A30 /* MockMusicService.swift in Sources */,
 				B69D16E82BE6AD9100F78622 /* AudioPlayerManagerTest.swift in Sources */,
+				B63805622BE6C78900157A30 /* MusicServiceTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

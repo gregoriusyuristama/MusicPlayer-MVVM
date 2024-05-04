@@ -1,35 +1,31 @@
 //
-//  MusicListRepositoryTest.swift
+//  MusicServiceTest.swift
 //  MusicPlayerTests
 //
 //  Created by Gregorius Yuristama Nugraha on 5/5/24.
 //
 
 import XCTest
-import Combine
 @testable import MusicPlayer
 
-final class MusicListRepositoryTest: XCTestCase {
-
-    private var sut: MusicListRepository!
-    private var mockService: MockMusicService!
+final class MusicServiceTest: XCTestCase {
     
+    private var sut: MockMusicService!
+
     override func setUpWithError() throws {
-        try super.setUpWithError()
-        mockService = MockMusicService()
-        sut = MusicListRepository(musicApiService: mockService)
+       try super.setUpWithError()
+        sut = MockMusicService()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        mockService = nil
         sut = nil
     }
     
-    func testFetchMusicSucceed() {
+    func testHitMusicServiceSucceed() {
         // given
-        mockService.willSucceed = true
-        let expectedMusicList = MockEntity.musicList
+        sut.willSucceed = true
+        let expectedResponse = MockEntity.musicResponse
         let expectation = expectation(description: "Got Music Response")
         
         // when
@@ -37,9 +33,9 @@ final class MusicListRepositoryTest: XCTestCase {
             .eraseToAnyPublisher()
         
         // then
-        var receivedMusic: [Music]?
+        var receivedResponse: MusicResponse?
         var receivedError: Error?
-        let cancellable = result.sink(receiveCompletion: { completion in
+        let cancellable = result.sink { completion in
             switch completion {
             case .finished:
                 break
@@ -47,31 +43,32 @@ final class MusicListRepositoryTest: XCTestCase {
                 receivedError = error
             }
             expectation.fulfill()
-        }, receiveValue: { musicList in
-            receivedMusic = musicList
-        })
+        } receiveValue: { musicResponse in
+            receivedResponse = musicResponse
+        }
         
         wait(for: [expectation], timeout: 5.0)
-        XCTAssertNotNil(receivedMusic)
+        XCTAssertNotNil(receivedResponse)
         XCTAssertNil(receivedError)
-        XCTAssertEqual(receivedMusic!, expectedMusicList)
+        XCTAssertEqual(receivedResponse!.results.count, expectedResponse.results.count)
         cancellable.cancel()
+
     }
     
-    func testFetchMusicFailed() {
+    func testHitMusicServiceFailed() {
         // given
-        mockService.willSucceed = false
+        sut.willSucceed = false
         let expectedError = NSError(domain: "com.example", code: 404, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch music"])
-        let expectation = expectation(description: "Got No Response")
+        let expectation = expectation(description: "Got No Music Response")
         
         // when
         let result = sut.getMusicListFromTrackName(trackName: "test")
             .eraseToAnyPublisher()
         
         // then
-        var receivedMusic: [Music]?
+        var receivedResponse: MusicResponse?
         var receivedError: Error?
-        let cancellable = result.sink(receiveCompletion: { completion in
+        let cancellable = result.sink { completion in
             switch completion {
             case .finished:
                 break
@@ -79,15 +76,16 @@ final class MusicListRepositoryTest: XCTestCase {
                 receivedError = error
             }
             expectation.fulfill()
-        }, receiveValue: { musicList in
-            receivedMusic = musicList
-        })
+        } receiveValue: { musicResponse in
+            receivedResponse = musicResponse
+        }
         
         wait(for: [expectation], timeout: 5.0)
         XCTAssertNotNil(receivedError)
-        XCTAssertNil(receivedMusic)
+        XCTAssertNil(receivedResponse)
         XCTAssertEqual(receivedError! as NSError, expectedError)
         cancellable.cancel()
+
     }
 
 }
