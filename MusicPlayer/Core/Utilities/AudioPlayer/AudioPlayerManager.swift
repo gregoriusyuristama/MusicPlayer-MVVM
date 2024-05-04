@@ -69,7 +69,7 @@ class AudioPlayerManager: NSObject {
                 handleErrorWithMessage(player?.currentItem?.error?.localizedDescription, error: player?.currentItem?.error)
             case .unknown:
                 // Player item is not yet ready.
-                print("Player Not Yer Ready")
+                print("Player Not Yet Ready")
             @unknown default:
                 print("Unknown Error")
             }

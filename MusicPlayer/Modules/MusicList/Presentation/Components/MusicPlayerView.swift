@@ -12,6 +12,7 @@ class MusicPlayerView: UIView {
     
     var music: Music?
     var audioPlayerDelegate: AudioPlayerDelegate?
+    var timeObserver: Any?
     
     lazy var playPauseButton: UIButton = {
         let button = UIButton()
@@ -71,6 +72,10 @@ class MusicPlayerView: UIView {
         initView()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemNewAccessLogEntry, object: AudioPlayerManager.shared.player?.currentItem)
+    }
+    
     private func initView() {
         addSubview(playPauseButton)
         addSubview(nextButton)
@@ -117,13 +122,30 @@ class MusicPlayerView: UIView {
     
     func songPlayed(music: Music) {
         self.music = music
+        
+        if let timeObserver = timeObserver {
+            AudioPlayerManager.shared.player?.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
+        
         AudioPlayerManager.shared.play(track: music)
-        AudioPlayerManager.shared.player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] time in
+        
+        timeObserver = AudioPlayerManager.shared.player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] time in
             self?.slider.value = Float(time.seconds)
         }
         songNameLabel.text = music.songName
         artistNameLabel.text = music.artistName
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemReadyToPlay), name: .AVPlayerItemNewAccessLogEntry, object: AudioPlayerManager.shared.player?.currentItem)
+
     }
+    
+    @objc private func playerItemReadyToPlay() {
+        guard let duration = AudioPlayerManager.shared.player?.currentItem?.duration.seconds else { return }
+        
+        slider.minimumValue = 0
+        slider.maximumValue = Float(duration)
+    }
+
     
     @objc func playPauseButtonTapped(_ sender: UIButton) {
         if AudioPlayerManager.shared.player?.rate == 0 {
