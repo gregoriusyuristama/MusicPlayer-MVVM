@@ -81,3 +81,10 @@ class AudioPlayerManager: NSObject {
     }
 }
 
+// MARK: Testable initializer extension
+extension AudioPlayerManager {
+    convenience init(playerItem: AVPlayerItem) {
+        self.init()
+        self.playerItem = playerItem
+    }
+}

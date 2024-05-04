@@ -32,6 +32,7 @@
 		B6469D342BE5E188005DD431 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D332BE5E188005DD431 /* ErrorManager.swift */; };
 		B6469D372BE5E67B005DD431 /* AudioPlayerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D362BE5E67B005DD431 /* AudioPlayerDelegate.swift */; };
 		B68F21C52BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68F21C42BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift */; };
+		B69D16E82BE6AD9100F78622 /* AudioPlayerManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69D16E72BE6AD9100F78622 /* AudioPlayerManagerTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		B6469D332BE5E188005DD431 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		B6469D362BE5E67B005DD431 /* AudioPlayerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerDelegate.swift; sourceTree = "<group>"; };
 		B68F21C42BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMusicListFromNameUseCase.swift; sourceTree = "<group>"; };
+		B69D16E72BE6AD9100F78622 /* AudioPlayerManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManagerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 		B623DCD22BE4FA7100627D39 /* MusicPlayerTests */ = {
 			isa = PBXGroup;
 			children = (
+				B69D16E52BE6AD7900F78622 /* Utilities */,
 				B62C87CE2BE63ABD0021FCD3 /* ViewModel */,
 				B62C87CC2BE637EE0021FCD3 /* MockEntity.swift */,
 			);
@@ -375,6 +378,22 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		B69D16E52BE6AD7900F78622 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B69D16E62BE6AD8400F78622 /* AudioPlayer */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B69D16E62BE6AD8400F78622 /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				B69D16E72BE6AD9100F78622 /* AudioPlayerManagerTest.swift */,
+			);
+			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -533,6 +552,7 @@
 			files = (
 				B62C87CD2BE637EE0021FCD3 /* MockEntity.swift in Sources */,
 				B62C87D02BE63AC90021FCD3 /* MusicListViewModelTest.swift in Sources */,
+				B69D16E82BE6AD9100F78622 /* AudioPlayerManagerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
