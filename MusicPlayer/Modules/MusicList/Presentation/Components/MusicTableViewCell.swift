@@ -49,8 +49,8 @@ class MusicTableViewCell: UITableViewCell {
             
             artistNameLabel.topAnchor.constraint(equalTo: songNameLabel.bottomAnchor, constant: 4),
             artistNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            artistNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             artistNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            artistNameLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width - playingIndicatorLabel.frame.width - 20),
             
             playingIndicatorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             playingIndicatorLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
