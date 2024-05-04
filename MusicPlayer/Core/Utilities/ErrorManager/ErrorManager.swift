@@ -19,8 +19,4 @@ class ErrorManager {
         
         keyWindow.rootViewController?.present(alertController, animated: true, completion: nil)
     }
-    
-    func hideLoading() {
-        UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
 }
