@@ -34,6 +34,7 @@
 		B68F21C52BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68F21C42BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift */; };
 		B69D16E82BE6AD9100F78622 /* AudioPlayerManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69D16E72BE6AD9100F78622 /* AudioPlayerManagerTest.swift */; };
 		B69D16EB2BE6B9B400F78622 /* ErrorManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69D16EA2BE6B9B400F78622 /* ErrorManagerTest.swift */; };
+		B69D16EE2BE6BCD600F78622 /* GetMusicListFromTrackNameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69D16ED2BE6BCD600F78622 /* GetMusicListFromTrackNameTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		B68F21C42BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMusicListFromNameUseCase.swift; sourceTree = "<group>"; };
 		B69D16E72BE6AD9100F78622 /* AudioPlayerManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManagerTest.swift; sourceTree = "<group>"; };
 		B69D16EA2BE6B9B400F78622 /* ErrorManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManagerTest.swift; sourceTree = "<group>"; };
+		B69D16ED2BE6BCD600F78622 /* GetMusicListFromTrackNameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMusicListFromTrackNameTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 		B623DCD22BE4FA7100627D39 /* MusicPlayerTests */ = {
 			isa = PBXGroup;
 			children = (
+				B69D16EC2BE6BCAB00F78622 /* UseCases */,
 				B69D16E52BE6AD7900F78622 /* Utilities */,
 				B62C87CE2BE63ABD0021FCD3 /* ViewModel */,
 				B62C87CC2BE637EE0021FCD3 /* MockEntity.swift */,
@@ -405,6 +408,14 @@
 			path = ErrorManager;
 			sourceTree = "<group>";
 		};
+		B69D16EC2BE6BCAB00F78622 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				B69D16ED2BE6BCD600F78622 /* GetMusicListFromTrackNameTest.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -562,6 +573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B62C87CD2BE637EE0021FCD3 /* MockEntity.swift in Sources */,
+				B69D16EE2BE6BCD600F78622 /* GetMusicListFromTrackNameTest.swift in Sources */,
 				B62C87D02BE63AC90021FCD3 /* MusicListViewModelTest.swift in Sources */,
 				B69D16EB2BE6B9B400F78622 /* ErrorManagerTest.swift in Sources */,
 				B69D16E82BE6AD9100F78622 /* AudioPlayerManagerTest.swift in Sources */,

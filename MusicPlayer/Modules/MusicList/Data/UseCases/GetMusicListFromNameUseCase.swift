@@ -8,13 +8,13 @@
 import Foundation
 import Combine
 
-protocol GetMusicListUseCaseProtocol {
+protocol GetMusicListFromNameUseCaseProtocol {
     var musicListRepository: MusicListRepositoryProtocol { get }
     
     func call(trackName: String) -> AnyPublisher<[Music], Error>
 }
 
-class GetMusicListFromNameUseCase: GetMusicListUseCaseProtocol {
+class GetMusicListFromNameUseCase: GetMusicListFromNameUseCaseProtocol {
     var musicListRepository: MusicListRepositoryProtocol
     
     init(musicListRepository: MusicListRepositoryProtocol = MusicListRepository()) {

@@ -11,9 +11,9 @@ import Combine
 class MusicListViewModel {
     private let output: PassthroughSubject<Output, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
-    private let getMusicListFromNameUseCase: GetMusicListUseCaseProtocol
+    private let getMusicListFromNameUseCase: GetMusicListFromNameUseCaseProtocol
     
-    init(getMusicUseCase: GetMusicListUseCaseProtocol = GetMusicListFromNameUseCase()) {
+    init(getMusicUseCase: GetMusicListFromNameUseCaseProtocol = GetMusicListFromNameUseCase()) {
         self.getMusicListFromNameUseCase = getMusicUseCase
     }
     

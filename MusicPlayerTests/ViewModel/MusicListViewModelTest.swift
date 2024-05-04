@@ -112,7 +112,7 @@ class MusicListViewModelTest: XCTestCase {
     }
     
     // MARK: Mock Music UseCase
-    class MockGetMusicListUseCase: GetMusicListUseCaseProtocol {
+    class MockGetMusicListUseCase: GetMusicListFromNameUseCaseProtocol {
         var musicListRepository: any MusicPlayer.MusicListRepositoryProtocol
         var willSuceed: Bool = true
         
