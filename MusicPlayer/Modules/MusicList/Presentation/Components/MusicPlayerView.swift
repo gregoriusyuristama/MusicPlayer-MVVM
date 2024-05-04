@@ -12,7 +12,7 @@ class MusicPlayerView: UIView {
     
     var music: Music?
     var audioPlayerDelegate: AudioPlayerDelegate?
-    var timeObserver: Any?
+    private var timeObserver: Any?
     
     lazy var playPauseButton: UIButton = {
         let button = UIButton()
