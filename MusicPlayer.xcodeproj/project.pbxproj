@@ -145,7 +145,7 @@
 			children = (
 				B623DCCA2BE4FA7100627D39 /* Info.plist */,
 				B623DCEC2BE5010C00627D39 /* Application */,
-				B623DCF22BE5018200627D39 /* Modules */,
+				B623DCF22BE5018200627D39 /* Features */,
 				B623DCED2BE5011B00627D39 /* Core */,
 			);
 			path = MusicPlayer;
@@ -186,12 +186,12 @@
 		B623DCED2BE5011B00627D39 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				B623DD192BE53E6C00627D39 /* Themes */,
-				B623DCF42BE5069B00627D39 /* Data */,
-				B623DCF12BE5016500627D39 /* Resources */,
-				B623DCF02BE5013D00627D39 /* Utilities */,
-				B623DCEF2BE5013800627D39 /* Extension */,
 				B623DCEE2BE5013200627D39 /* Constants */,
+				B623DCF42BE5069B00627D39 /* Data */,
+				B623DCEF2BE5013800627D39 /* Extension */,
+				B623DCF12BE5016500627D39 /* Resources */,
+				B623DD192BE53E6C00627D39 /* Themes */,
+				B623DCF02BE5013D00627D39 /* Utilities */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -215,8 +215,8 @@
 		B623DCF02BE5013D00627D39 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				B6469D352BE5E4DB005DD431 /* ErrorManager */,
 				B6469D2B2BE54E50005DD431 /* AudioPlayer */,
+				B6469D352BE5E4DB005DD431 /* ErrorManager */,
 				B623DD1D2BE5401000627D39 /* LoadingManager */,
 				B623DD0F2BE5130D00627D39 /* MusicService */,
 			);
@@ -231,20 +231,20 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		B623DCF22BE5018200627D39 /* Modules */ = {
+		B623DCF22BE5018200627D39 /* Features */ = {
 			isa = PBXGroup;
 			children = (
 				B623DCF32BE501BE00627D39 /* MusicList */,
 			);
-			path = Modules;
+			path = Features;
 			sourceTree = "<group>";
 		};
 		B623DCF32BE501BE00627D39 /* MusicList */ = {
 			isa = PBXGroup;
 			children = (
-				B623DD002BE5096C00627D39 /* Presentation */,
 				B623DCFF2BE5096800627D39 /* Data */,
 				B623DCFE2BE5096200627D39 /* Domain */,
+				B623DD002BE5096C00627D39 /* Presentation */,
 			);
 			path = MusicList;
 			sourceTree = "<group>";
