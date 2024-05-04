@@ -45,7 +45,7 @@ class MusicTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             songNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             songNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            songNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            songNameLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width - playingIndicatorLabel.frame.width - 20),
             
             artistNameLabel.topAnchor.constraint(equalTo: songNameLabel.bottomAnchor, constant: 4),
             artistNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
