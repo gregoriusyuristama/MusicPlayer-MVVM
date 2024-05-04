@@ -24,7 +24,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
 
       - name: Install Bundler
-        run: gem install bundler
+        run: gem install bundler -v 2.4.22
 
       - name: Install gems
         run: bundle install
