@@ -9,12 +9,12 @@ import Foundation
 import Combine
 
 class MusicListViewModel {
-    private let musicListRepository: MusicListRepositoryProtocol
     private let output: PassthroughSubject<Output, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
+    private let getMusicListFromNameUseCase: GetMusicListUseCaseProtocol
     
-    init(musicListRepository: MusicListRepositoryProtocol = MusicListRepository(musicApiService: ItunesService())) {
-        self.musicListRepository = musicListRepository
+    init(getMusicUseCase: GetMusicListUseCaseProtocol = GetMusicListFromNameUseCase()) {
+        self.getMusicListFromNameUseCase = getMusicUseCase
     }
     
     func transform(input: AnyPublisher<Input, Never>) -> AnyPublisher<Output, Never> {
@@ -29,7 +29,7 @@ class MusicListViewModel {
     
     func handleSearchTrackName(trackName: String) {
         output.send(.toggleSearch(isSearching: true))
-        musicListRepository.getMusicListFromTrackName(trackName: trackName).sink { [weak self] completion in
+        getMusicListFromNameUseCase.call(trackName: trackName).sink { [weak self] completion in
             self?.output.send(.toggleSearch(isSearching: false))
             if case .failure(let error) = completion {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: { [weak self] in

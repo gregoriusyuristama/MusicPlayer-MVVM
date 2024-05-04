@@ -11,7 +11,7 @@ import Combine
 class MusicListRepository: MusicListRepositoryProtocol {
     private let musicApiService: MusicServiceProtocol
     
-    init(musicApiService: MusicServiceProtocol) {
+    init(musicApiService: MusicServiceProtocol = ItunesService()) {
         self.musicApiService = musicApiService
     }
     

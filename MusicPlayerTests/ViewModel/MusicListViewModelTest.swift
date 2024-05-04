@@ -12,18 +12,18 @@ import Combine
 class MusicListViewModelTest: XCTestCase {
     
     private var sut: MusicListViewModel!
-    private var repository: MockRepositoryViewModel!
+    private var mockUseCase: MockGetMusicListUseCase!
     private var cancellables = Set<AnyCancellable>()
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        repository = MockRepositoryViewModel()
-        sut = MusicListViewModel(musicListRepository: repository)
+        mockUseCase = MockGetMusicListUseCase()
+        sut = MusicListViewModel(getMusicUseCase: mockUseCase)
     }
     
     override func tearDownWithError() throws {
         try super.setUpWithError()
-        repository = nil
+        mockUseCase = nil
         sut = nil
         cancellables.removeAll()
     }
@@ -31,8 +31,8 @@ class MusicListViewModelTest: XCTestCase {
     func testFetchMusicSuceed() {
         // given
         let expectedMusicList = MockEntity.musicList
-        repository.willSuceed = true
-        let expectation = expectation(description: "Music Fethed Succesfully")
+        mockUseCase.willSuceed = true
+        let expectation = expectation(description: "Music Fetched Succesfully")
         let testInput = PassthroughSubject<MusicListViewModel.Input, Never>()
         
         // when
@@ -40,7 +40,7 @@ class MusicListViewModelTest: XCTestCase {
             .sink { output in
                 switch output {
                 case .fetchMusicListDidSucceed(let musicList):
-                    XCTAssertEqual(musicList.count, expectedMusicList.count) // Assuming 3 music items returned from mock repository
+                    XCTAssertEqual(musicList.count, expectedMusicList.count) 
                     expectation.fulfill()
                 default:
                     break
@@ -56,7 +56,7 @@ class MusicListViewModelTest: XCTestCase {
     func testFetchMusicFailed() {
         // given
         let expectedError = NSError(domain: "com.example", code: 404, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch music"])
-        repository.willSuceed = false
+        mockUseCase.willSuceed = false
         let expectation = expectation(description: "Fail to Fetch Music ")
         let testInput = PassthroughSubject<MusicListViewModel.Input, Never>()
         
@@ -79,11 +79,16 @@ class MusicListViewModelTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
     
-    // MARK: Mock Music Repository
-    class MockRepositoryViewModel: MusicListRepositoryProtocol {
+    // MARK: Mock Music UseCase
+    class MockGetMusicListUseCase: GetMusicListUseCaseProtocol {
+        var musicListRepository: any MusicPlayer.MusicListRepositoryProtocol
         var willSuceed: Bool = true
         
-        func getMusicListFromTrackName(trackName: String) -> AnyPublisher<[MusicPlayer.Music], any Error> {
+        init(musicListRepository: any MusicPlayer.MusicListRepositoryProtocol = MusicListRepository()) {
+            self.musicListRepository = musicListRepository
+        }
+        
+        func call(trackName: String) -> AnyPublisher<[MusicPlayer.Music], any Error> {
             if willSuceed {
                 return Just(MockEntity.musicList)
                     .setFailureType(to: Error.self)
@@ -92,7 +97,6 @@ class MusicListViewModelTest: XCTestCase {
                 let error = NSError(domain: "com.example", code: 404, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch music"])
                 return Fail(error: error).eraseToAnyPublisher()
             }
-            
         }
         
         

@@ -31,6 +31,7 @@
 		B6469D2F2BE555FC005DD431 /* MusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */; };
 		B6469D342BE5E188005DD431 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D332BE5E188005DD431 /* ErrorManager.swift */; };
 		B6469D372BE5E67B005DD431 /* AudioPlayerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D362BE5E67B005DD431 /* AudioPlayerDelegate.swift */; };
+		B68F21C52BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68F21C42BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerView.swift; sourceTree = "<group>"; };
 		B6469D332BE5E188005DD431 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		B6469D362BE5E67B005DD431 /* AudioPlayerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerDelegate.swift; sourceTree = "<group>"; };
+		B68F21C42BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMusicListFromNameUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,7 +261,8 @@
 		B623DCFF2BE5096800627D39 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				B623DD092BE50E1100627D39 /* MusicListRepository.swift */,
+				B68F21C32BE6A29D00452F27 /* UseCases */,
+				B68F21C22BE6A29500452F27 /* Repository */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -354,6 +357,22 @@
 				B6469D332BE5E188005DD431 /* ErrorManager.swift */,
 			);
 			path = ErrorManager;
+			sourceTree = "<group>";
+		};
+		B68F21C22BE6A29500452F27 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				B623DD092BE50E1100627D39 /* MusicListRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		B68F21C32BE6A29D00452F27 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				B68F21C42BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift */,
+			);
+			path = UseCases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -499,6 +518,7 @@
 				B623DCBD2BE4FA7000627D39 /* AppDelegate.swift in Sources */,
 				B6469D2F2BE555FC005DD431 /* MusicPlayerView.swift in Sources */,
 				B623DCBF2BE4FA7000627D39 /* SceneDelegate.swift in Sources */,
+				B68F21C52BE6A2B400452F27 /* GetMusicListFromNameUseCase.swift in Sources */,
 				B623DD062BE50C2500627D39 /* MusicListViewModel.swift in Sources */,
 				B623DD0A2BE50E1100627D39 /* MusicListRepository.swift in Sources */,
 				B623DCFA2BE507D700627D39 /* MusicResponse.swift in Sources */,
