@@ -178,13 +178,21 @@ extension MusicListViewController: UISearchResultsUpdating {
 // MARK: Extension AudioPlayerDelegate
 extension MusicListViewController: AudioPlayerDelegate {
     func nextTrack() {
-        currentSongIndex += 1
+        if currentSongIndex == musicList.count - 1 {
+            currentSongIndex = 0
+        } else {
+            currentSongIndex += 1
+        }
         musicPlayerView.songPlayed(music: musicList[currentSongIndex])
         tableView.reloadData()
     }
     
     func prevTrack() {
-        currentSongIndex -= 1
+        if currentSongIndex == 0 {
+            currentSongIndex = musicList.count - 1
+        } else {
+            currentSongIndex -= 1
+        }
         musicPlayerView.songPlayed(music: musicList[currentSongIndex])
         tableView.reloadData()
     }
