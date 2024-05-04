@@ -27,6 +27,7 @@
 		B623DD212BE5407200627D39 /* UIAppplication+keyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B623DD202BE5407200627D39 /* UIAppplication+keyWindow.swift */; };
 		B62C87CD2BE637EE0021FCD3 /* MockEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C87CC2BE637EE0021FCD3 /* MockEntity.swift */; };
 		B62C87D02BE63AC90021FCD3 /* MusicListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C87CF2BE63AC90021FCD3 /* MusicListViewModelTest.swift */; };
+		B638055F2BE6C3C800157A30 /* MusicListRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638055E2BE6C3C800157A30 /* MusicListRepositoryTest.swift */; };
 		B6469D2D2BE54E6F005DD431 /* AudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */; };
 		B6469D2F2BE555FC005DD431 /* MusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */; };
 		B6469D342BE5E188005DD431 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D332BE5E188005DD431 /* ErrorManager.swift */; };
@@ -79,6 +80,7 @@
 		B623DD202BE5407200627D39 /* UIAppplication+keyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAppplication+keyWindow.swift"; sourceTree = "<group>"; };
 		B62C87CC2BE637EE0021FCD3 /* MockEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEntity.swift; sourceTree = "<group>"; };
 		B62C87CF2BE63AC90021FCD3 /* MusicListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicListViewModelTest.swift; sourceTree = "<group>"; };
+		B638055E2BE6C3C800157A30 /* MusicListRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicListRepositoryTest.swift; sourceTree = "<group>"; };
 		B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
 		B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerView.swift; sourceTree = "<group>"; };
 		B6469D332BE5E188005DD431 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		B623DCD22BE4FA7100627D39 /* MusicPlayerTests */ = {
 			isa = PBXGroup;
 			children = (
+				B638055D2BE6C3B200157A30 /* Repository */,
 				B69D16EC2BE6BCAB00F78622 /* UseCases */,
 				B69D16E52BE6AD7900F78622 /* Utilities */,
 				B62C87CE2BE63ABD0021FCD3 /* ViewModel */,
@@ -348,6 +351,14 @@
 				B62C87CF2BE63AC90021FCD3 /* MusicListViewModelTest.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B638055D2BE6C3B200157A30 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				B638055E2BE6C3C800157A30 /* MusicListRepositoryTest.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		B6469D2B2BE54E50005DD431 /* AudioPlayer */ = {
@@ -573,6 +584,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B62C87CD2BE637EE0021FCD3 /* MockEntity.swift in Sources */,
+				B638055F2BE6C3C800157A30 /* MusicListRepositoryTest.swift in Sources */,
 				B69D16EE2BE6BCD600F78622 /* GetMusicListFromTrackNameTest.swift in Sources */,
 				B62C87D02BE63AC90021FCD3 /* MusicListViewModelTest.swift in Sources */,
 				B69D16EB2BE6B9B400F78622 /* ErrorManagerTest.swift in Sources */,
