@@ -79,6 +79,38 @@ class MusicListViewModelTest: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
     
+    func testIsSearchingState() {
+        // given
+        let input = PassthroughSubject<MusicListViewModel.Input, Never>()
+        var receivedToggleSearch: Bool = false
+        let expectation = XCTestExpectation(description: "Search toggled")
+
+        // when
+        sut.transform(input: input.eraseToAnyPublisher())
+            .sink { output in
+                switch output {
+                case .toggleSearch(let isSearching):
+                    receivedToggleSearch = isSearching
+                    // then
+                    // check whether isSearching is toggled to true and false
+                    if isSearching {
+                        XCTAssertTrue(receivedToggleSearch)
+                    }
+                    else {
+                        XCTAssertFalse(receivedToggleSearch)
+                        expectation.fulfill()
+                    }
+                default:
+                    break
+                }
+            }
+            .store(in: &cancellables)
+
+        input.send(.searchTriggered("test"))
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
     // MARK: Mock Music UseCase
     class MockGetMusicListUseCase: GetMusicListUseCaseProtocol {
         var musicListRepository: any MusicPlayer.MusicListRepositoryProtocol
