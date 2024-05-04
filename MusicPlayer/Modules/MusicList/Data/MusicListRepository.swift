@@ -9,9 +9,9 @@ import Foundation
 import Combine
 
 class MusicListRepository: MusicListRepositoryProtocol {
-    private let musicApiService: ItunesServiceProtocol
+    private let musicApiService: MusicServiceProtocol
     
-    init(musicApiService: ItunesServiceProtocol) {
+    init(musicApiService: MusicServiceProtocol) {
         self.musicApiService = musicApiService
     }
     

@@ -13,7 +13,7 @@ class MusicListViewModel {
     private let output: PassthroughSubject<Output, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
     
-    init(musicListRepository: MusicListRepository = MusicListRepository(musicApiService: ItunesService())) {
+    init(musicListRepository: MusicListRepositoryProtocol = MusicListRepository(musicApiService: ItunesService())) {
         self.musicListRepository = musicListRepository
     }
     

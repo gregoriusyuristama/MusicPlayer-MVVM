@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-protocol ItunesServiceProtocol {
+protocol MusicServiceProtocol {
     func getMusicListFromTrackName(trackName: String) -> AnyPublisher<MusicResponse, Error>
 }
 
-class ItunesService: ItunesServiceProtocol {
+class ItunesService: MusicServiceProtocol {
     func getMusicListFromTrackName(trackName: String) -> AnyPublisher<MusicResponse, any Error> {
         let url = URL(string: "https://itunes.apple.com/search?term=\(trackName)")!
         return URLSession.shared.dataTaskPublisher(for: url)
