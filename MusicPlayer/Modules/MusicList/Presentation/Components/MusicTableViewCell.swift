@@ -26,11 +26,21 @@ class MusicTableViewCell: UITableViewCell {
         return label
     }()
     
+    lazy var playingIndicatorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.text = "Playing..."
+        label.textColor = UIColor.gray
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(songNameLabel)
         contentView.addSubview(artistNameLabel)
+        contentView.addSubview(playingIndicatorLabel)
         
         NSLayoutConstraint.activate([
             songNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -40,8 +50,13 @@ class MusicTableViewCell: UITableViewCell {
             artistNameLabel.topAnchor.constraint(equalTo: songNameLabel.bottomAnchor, constant: 4),
             artistNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             artistNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            artistNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            artistNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            
+            playingIndicatorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            playingIndicatorLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
+        
+        playingIndicatorLabel.isHidden = true
     }
     
     required init?(coder aDecoder: NSCoder) {

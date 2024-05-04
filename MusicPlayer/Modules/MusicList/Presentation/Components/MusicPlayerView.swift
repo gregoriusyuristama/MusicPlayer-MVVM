@@ -9,7 +9,9 @@ import UIKit
 import CoreMedia
 
 class MusicPlayerView: UIView {
-
+    
+    var music: Music?
+    var audioPlayerDelegate: AudioPlayerDelegate?
     
     lazy var playPauseButton: UIButton = {
         let button = UIButton()
@@ -40,27 +42,51 @@ class MusicPlayerView: UIView {
         return slider
     }()
     
+    lazy var songNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No Song Yet"
+        label.numberOfLines = 0
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var artistNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "-"
+        label.numberOfLines = 0
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .red
-        commonInit()
+        initView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
+        initView()
     }
     
-    private func commonInit() {
+    private func initView() {
         addSubview(playPauseButton)
         addSubview(nextButton)
         addSubview(prevButton)
         addSubview(slider)
+        addSubview(songNameLabel)
+        addSubview(artistNameLabel)
         
         playPauseButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         prevButton.translatesAutoresizingMaskIntoConstraints = false
         slider.translatesAutoresizingMaskIntoConstraints = false
+        songNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        artistNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let safeArea = self.layoutMarginsGuide
         
         NSLayoutConstraint.activate([
             playPauseButton.topAnchor.constraint(equalTo: topAnchor, constant: 8),
@@ -72,19 +98,31 @@ class MusicPlayerView: UIView {
             prevButton.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             prevButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             
-            slider.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: 8),
+            songNameLabel.bottomAnchor.constraint(equalTo: artistNameLabel.topAnchor, constant: -8),
+            songNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            songNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            artistNameLabel.bottomAnchor.constraint(equalTo: slider.topAnchor, constant: -8),
+            artistNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            artistNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            
+            slider.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -16),
             slider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             slider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
         
+        
+    }
+    
+    func songPlayed(music: Music) {
+        self.music = music
+        AudioPlayerManager.shared.play(track: music)
         AudioPlayerManager.shared.player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] time in
             self?.slider.value = Float(time.seconds)
-            if AudioPlayerManager.shared.player?.rate == 0 {
-                self?.playPauseButton.setTitle("Play", for: .normal)
-            } else {
-                self?.playPauseButton.setTitle("Pause", for: .normal)
-            }
         }
+        songNameLabel.text = music.songName
+        artistNameLabel.text = music.artistName
     }
     
     @objc func playPauseButtonTapped(_ sender: UIButton) {
@@ -98,11 +136,11 @@ class MusicPlayerView: UIView {
     }
     
     @objc func nextButtonTapped(_ sender: UIButton) {
-        AudioPlayerManager.shared.playNext()
+        audioPlayerDelegate?.nextTrack()
     }
     
     @objc func prevButtonTapped(_ sender: UIButton) {
-        AudioPlayerManager.shared.playPrevious()
+        audioPlayerDelegate?.prevTrack()
     }
     
     @objc func sliderValueChanged(_ slider: UISlider) {

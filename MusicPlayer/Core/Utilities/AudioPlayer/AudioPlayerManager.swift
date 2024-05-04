@@ -8,21 +8,41 @@
 import Foundation
 import AVFoundation
 
-class AudioPlayerManager {
+class AudioPlayerManager: NSObject {
     static let shared = AudioPlayerManager()
     
     var player: AVPlayer?
-    var tracks: [Music] = []
-    var currentTrackIndex: Int = 0
+    private var playerItem: AVPlayerItem?
     
-    private init() {
+    
+    private override init() {
+        super.init()
         player = AVPlayer()
     }
     
-    private func play() {
-        guard let player = player, let currentTrack = currentTrack else { return }
-        player.play()
-        print("Now playing: \(currentTrack.songName)")
+    deinit {
+        playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
+    }
+    func play(track: Music) {
+        guard let audioUrl = track.audioUrl else { return }
+        // Create the asset to play
+        let asset = AVAsset(url: audioUrl)
+        
+        // Create a new AVPlayerItem with the asset and an
+        // array of asset keys to be automatically loaded
+        playerItem = AVPlayerItem(asset: asset)
+        
+        // Register as an observer of the player item's status property
+        playerItem?.addObserver(self,
+                                forKeyPath: #keyPath(AVPlayerItem.status),
+                                options: [.old, .new],
+                                context: nil)
+        
+        // Associate the player item with the player
+        player = AVPlayer(playerItem: playerItem)
+        player?.replaceCurrentItem(with: playerItem)
+        print("Now playing: \(track.songName)")
+        player?.play()
     }
     
     func pause() {
@@ -30,29 +50,34 @@ class AudioPlayerManager {
         print("Playback paused")
     }
     
-    func playNext() {
-        guard tracks.indices.contains(currentTrackIndex + 1) else { return }
-        currentTrackIndex += 1
-        playCurrentTrack()
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == #keyPath(AVPlayerItem.status) {
+            let status: AVPlayerItem.Status
+            if let statusNumber = change?[.newKey] as? NSNumber {
+                status = AVPlayerItem.Status(rawValue: statusNumber.intValue)!
+            } else {
+                status = .unknown
+            }
+            
+            // Switch over status value
+            switch status {
+            case .readyToPlay:
+                // Player item is ready to play.
+                print("Ready To Play")
+            case .failed:
+                // Player item failed. See error.
+                handleErrorWithMessage(player?.currentItem?.error?.localizedDescription, error: player?.currentItem?.error)
+            case .unknown:
+                // Player item is not yet ready.
+                print("Player Not Yer Ready")
+            @unknown default:
+                print("Unknown Error")
+            }
+        }
     }
     
-    func playPrevious() {
-        guard tracks.indices.contains(currentTrackIndex - 1) else { return }
-        currentTrackIndex -= 1
-        playCurrentTrack()
-    }
-    
-    func playCurrentTrack() {
-        guard let player = player, let trackURL = tracks[currentTrackIndex].audioUrl else { return }
-        let playerItem = AVPlayerItem(url: trackURL)
-        
-        player.replaceCurrentItem(with: playerItem)
-        play()
-    }
-    
-    private var currentTrack: Music? {
-        guard !tracks.isEmpty && tracks.indices.contains(currentTrackIndex) else { return nil }
-        return tracks[currentTrackIndex]
+    private func handleErrorWithMessage(_ message: String?, error: Error? = nil) {
+        ErrorManager.shared.showError(errorMessage: error?.localizedDescription ?? "Unkown Error")
     }
 }
 

@@ -35,6 +35,7 @@ class MusicListViewController: UIViewController {
     fileprivate var cancellables = Set<AnyCancellable>()
     
     fileprivate var musicList: [Music] = .init()
+    fileprivate var currentSongIndex = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,7 @@ class MusicListViewController: UIViewController {
     
     fileprivate func initView() {
         musicPlayerView = MusicPlayerView(frame: CGRect(x: 0, y: view.frame.height - 200, width: view.frame.width, height: 200))
+        musicPlayerView.audioPlayerDelegate = self
         
         view.backgroundColor = .systemBackground
         
@@ -111,9 +113,7 @@ class MusicListViewController: UIViewController {
     func updateViewWithError(errorMessage: String) {
         informationLabel.text = "ERROR: \(errorMessage)"
         showLabelAndHideTable()
-        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        ErrorManager.shared.showError(errorMessage: errorMessage)
     }
     
     fileprivate func bind() {
@@ -123,11 +123,8 @@ class MusicListViewController: UIViewController {
             .sink { [weak self] event in
                 switch event {
                 case .fetchMusicListDidSucceed(let musicList):
-                    //                    debugPrint(musicList)
                     self?.updateTableView(with: musicList)
-                    AudioPlayerManager.shared.tracks = musicList
                 case .fetchMusicListDidFail(let error):
-                    debugPrint(error)
                     self?.updateViewWithError(errorMessage: error.localizedDescription)
                 case .toggleSearch(let isSearching):
                     self?.updateViewWhenLoading(isSearching: isSearching)
@@ -150,16 +147,21 @@ extension MusicListViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.config(self.musicList[indexPath.row])
         
+        if self.musicList[indexPath.row] == musicPlayerView.music{
+            cell.playingIndicatorLabel.isHidden = false
+        } else {
+            cell.playingIndicatorLabel.isHidden = true
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.searchController.isActive = false
-        AudioPlayerManager.shared.currentTrackIndex = indexPath.row
-        AudioPlayerManager.shared.playCurrentTrack()
+        musicPlayerView.songPlayed(music: musicList[indexPath.row])
+        currentSongIndex = indexPath.row
+        tableView.reloadData()
     }
-    
-    
 }
 
 // MARK: Extension UISearchResultsUpdating
@@ -173,3 +175,17 @@ extension MusicListViewController: UISearchResultsUpdating {
     }
 }
 
+// MARK: Extension AudioPlayerDelegate
+extension MusicListViewController: AudioPlayerDelegate {
+    func nextTrack() {
+        currentSongIndex += 1
+        musicPlayerView.songPlayed(music: musicList[currentSongIndex])
+        tableView.reloadData()
+    }
+    
+    func prevTrack() {
+        currentSongIndex -= 1
+        musicPlayerView.songPlayed(music: musicList[currentSongIndex])
+        tableView.reloadData()
+    }
+}

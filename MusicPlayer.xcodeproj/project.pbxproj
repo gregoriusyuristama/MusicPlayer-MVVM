@@ -28,6 +28,8 @@
 		B623DD212BE5407200627D39 /* UIAppplication+keyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B623DD202BE5407200627D39 /* UIAppplication+keyWindow.swift */; };
 		B6469D2D2BE54E6F005DD431 /* AudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */; };
 		B6469D2F2BE555FC005DD431 /* MusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */; };
+		B6469D342BE5E188005DD431 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D332BE5E188005DD431 /* ErrorManager.swift */; };
+		B6469D372BE5E67B005DD431 /* AudioPlayerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D362BE5E67B005DD431 /* AudioPlayerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		B623DD202BE5407200627D39 /* UIAppplication+keyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAppplication+keyWindow.swift"; sourceTree = "<group>"; };
 		B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
 		B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerView.swift; sourceTree = "<group>"; };
+		B6469D332BE5E188005DD431 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
+		B6469D362BE5E67B005DD431 /* AudioPlayerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +194,7 @@
 		B623DCF02BE5013D00627D39 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				B6469D352BE5E4DB005DD431 /* ErrorManager */,
 				B6469D2B2BE54E50005DD431 /* AudioPlayer */,
 				B623DD1D2BE5401000627D39 /* LoadingManager */,
 				B623DD0F2BE5130D00627D39 /* MusicService */,
@@ -259,8 +264,9 @@
 		B623DD002BE5096C00627D39 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B623DD042BE50A1C00627D39 /* Components */,
 				B623DD032BE5097F00627D39 /* ViewModel */,
-				B623DD022BE5097B00627D39 /* View */,
+				B623DD022BE5097B00627D39 /* ViewController */,
 				B623DD012BE5097600627D39 /* Model */,
 			);
 			path = Presentation;
@@ -274,13 +280,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		B623DD022BE5097B00627D39 /* View */ = {
+		B623DD022BE5097B00627D39 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B623DD042BE50A1C00627D39 /* Components */,
 				B623DCC02BE4FA7000627D39 /* MusicListViewController.swift */,
 			);
-			path = View;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		B623DD032BE5097F00627D39 /* ViewModel */ = {
@@ -327,8 +332,17 @@
 			isa = PBXGroup;
 			children = (
 				B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */,
+				B6469D362BE5E67B005DD431 /* AudioPlayerDelegate.swift */,
 			);
 			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
+		B6469D352BE5E4DB005DD431 /* ErrorManager */ = {
+			isa = PBXGroup;
+			children = (
+				B6469D332BE5E188005DD431 /* ErrorManager.swift */,
+			);
+			path = ErrorManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,9 +477,11 @@
 			files = (
 				B623DD112BE5272900627D39 /* DispatchQueue+AsyncDeduped.swift in Sources */,
 				B6469D2D2BE54E6F005DD431 /* AudioPlayerManager.swift in Sources */,
+				B6469D372BE5E67B005DD431 /* AudioPlayerDelegate.swift in Sources */,
 				B623DCFC2BE5085E00627D39 /* ItunesService.swift in Sources */,
 				B623DCC12BE4FA7000627D39 /* MusicListViewController.swift in Sources */,
 				B623DCF82BE5074300627D39 /* MusicModel.swift in Sources */,
+				B6469D342BE5E188005DD431 /* ErrorManager.swift in Sources */,
 				B623DD0C2BE50F5400627D39 /* MusicListRepositoryProtocol.swift in Sources */,
 				B623DD212BE5407200627D39 /* UIAppplication+keyWindow.swift in Sources */,
 				B623DD1F2BE5401700627D39 /* LoadingManager.swift in Sources */,
