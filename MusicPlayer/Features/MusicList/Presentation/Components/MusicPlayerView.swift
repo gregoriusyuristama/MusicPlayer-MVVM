@@ -143,6 +143,7 @@ class MusicPlayerView: UIView {
     
     func songPlayed(music: Music) {
         self.music = music
+        playPauseButton.setImage(ButtonImageComponent.pauseButtonImage(), for: .normal)
         
         if let timeObserver = timeObserver {
             AudioPlayerManager.shared.player?.removeTimeObserver(timeObserver)

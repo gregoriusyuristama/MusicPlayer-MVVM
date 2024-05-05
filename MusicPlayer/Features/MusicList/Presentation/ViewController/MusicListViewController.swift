@@ -76,7 +76,7 @@ class MusicListViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.searchController.searchResultsUpdater = self
+        self.searchController.searchBar.delegate = self
         self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = AppLabel.searchSongPlaceholder
     }
@@ -164,13 +164,12 @@ extension MusicListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-// MARK: Extension UISearchResultsUpdating
-extension MusicListViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text, !searchText.isEmpty{
-            DispatchQueue.main.asyncDeduped(target: self, after: 0.5) { [weak self] in
-                self?.input.send(.searchTriggered(searchText))
-            }
+// MARK: Extension UISearchBarDelegate
+extension MusicListViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            input.send(.searchTriggered(searchText))
         }
     }
 }
