@@ -47,3 +47,12 @@ jobs:
       - name: Run Tests (Cache)
         if: steps.setup.outputs.cache-hit == 'true'
         run: bundle exec fastlane unit_test skip_package_dependencies_resolution:true
+
+      - name: Bump version
+        run: agvtool next-version -all
+
+      - name: Commit bumped version
+        run: |
+          git add .
+          git commit -m "bump version (auto)"
+          git push origin HEAD
