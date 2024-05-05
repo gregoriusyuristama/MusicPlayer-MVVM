@@ -47,7 +47,8 @@ extension MusicModel {
         return Music(
             songName: self.trackName ?? "No Track Name",
             artistName: self.artistName ?? "No Artist Name",
-            audioUrl: URL(string: self.previewUrl ?? "")
+            audioUrl: URL(string: self.previewUrl ?? ""), 
+            songArtwork: URL(string: self.artworkUrl60 ?? "")
         )
     }
 }

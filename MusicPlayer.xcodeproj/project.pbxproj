@@ -30,6 +30,12 @@
 		B638055F2BE6C3C800157A30 /* MusicListRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638055E2BE6C3C800157A30 /* MusicListRepositoryTest.swift */; };
 		B63805622BE6C78900157A30 /* MusicServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63805612BE6C78900157A30 /* MusicServiceTest.swift */; };
 		B63805642BE6C82100157A30 /* MockMusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63805632BE6C82100157A30 /* MockMusicService.swift */; };
+		B63805662BE74C6F00157A30 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63805652BE74C6F00157A30 /* AppLabel.swift */; };
+		B63805682BE74E1D00157A30 /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63805672BE74E1D00157A30 /* Decimal.swift */; };
+		B638056A2BE74FF800157A30 /* ColorPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63805692BE74FF800157A30 /* ColorPath.swift */; };
+		B638056C2BE752E500157A30 /* ResourcePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638056B2BE752E500157A30 /* ResourcePath.swift */; };
+		B638056F2BE755C900157A30 /* FontTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638056E2BE755C900157A30 /* FontTheme.swift */; };
+		B63805712BE75CA300157A30 /* ButtonImageComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63805702BE75CA300157A30 /* ButtonImageComponent.swift */; };
 		B6469D2D2BE54E6F005DD431 /* AudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */; };
 		B6469D2F2BE555FC005DD431 /* MusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */; };
 		B6469D342BE5E188005DD431 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6469D332BE5E188005DD431 /* ErrorManager.swift */; };
@@ -85,6 +91,12 @@
 		B638055E2BE6C3C800157A30 /* MusicListRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicListRepositoryTest.swift; sourceTree = "<group>"; };
 		B63805612BE6C78900157A30 /* MusicServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicServiceTest.swift; sourceTree = "<group>"; };
 		B63805632BE6C82100157A30 /* MockMusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMusicService.swift; sourceTree = "<group>"; };
+		B63805652BE74C6F00157A30 /* AppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLabel.swift; sourceTree = "<group>"; };
+		B63805672BE74E1D00157A30 /* Decimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decimal.swift; sourceTree = "<group>"; };
+		B63805692BE74FF800157A30 /* ColorPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPath.swift; sourceTree = "<group>"; };
+		B638056B2BE752E500157A30 /* ResourcePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcePath.swift; sourceTree = "<group>"; };
+		B638056E2BE755C900157A30 /* FontTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontTheme.swift; sourceTree = "<group>"; };
+		B63805702BE75CA300157A30 /* ButtonImageComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImageComponent.swift; sourceTree = "<group>"; };
 		B6469D2C2BE54E6F005DD431 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
 		B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerView.swift; sourceTree = "<group>"; };
 		B6469D332BE5E188005DD431 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
@@ -199,6 +211,10 @@
 		B623DCEE2BE5013200627D39 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				B63805652BE74C6F00157A30 /* AppLabel.swift */,
+				B63805672BE74E1D00157A30 /* Decimal.swift */,
+				B63805692BE74FF800157A30 /* ColorPath.swift */,
+				B638056B2BE752E500157A30 /* ResourcePath.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -323,6 +339,7 @@
 			children = (
 				B623DD0D2BE5129800627D39 /* MusicTableViewCell.swift */,
 				B6469D2E2BE555FC005DD431 /* MusicPlayerView.swift */,
+				B63805702BE75CA300157A30 /* ButtonImageComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -338,6 +355,7 @@
 		B623DD192BE53E6C00627D39 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				B638056D2BE755BC00157A30 /* Styles */,
 			);
 			path = Themes;
 			sourceTree = "<group>";
@@ -372,6 +390,14 @@
 				B63805612BE6C78900157A30 /* MusicServiceTest.swift */,
 			);
 			path = MusicService;
+			sourceTree = "<group>";
+		};
+		B638056D2BE755BC00157A30 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				B638056E2BE755C900157A30 /* FontTheme.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		B6469D2B2BE54E50005DD431 /* AudioPlayer */ = {
@@ -571,16 +597,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B63805712BE75CA300157A30 /* ButtonImageComponent.swift in Sources */,
 				B623DD112BE5272900627D39 /* DispatchQueue+AsyncDeduped.swift in Sources */,
 				B6469D2D2BE54E6F005DD431 /* AudioPlayerManager.swift in Sources */,
 				B6469D372BE5E67B005DD431 /* AudioPlayerDelegate.swift in Sources */,
 				B623DCFC2BE5085E00627D39 /* ItunesService.swift in Sources */,
+				B638056F2BE755C900157A30 /* FontTheme.swift in Sources */,
 				B623DCC12BE4FA7000627D39 /* MusicListViewController.swift in Sources */,
 				B623DCF82BE5074300627D39 /* MusicModel.swift in Sources */,
+				B63805682BE74E1D00157A30 /* Decimal.swift in Sources */,
 				B6469D342BE5E188005DD431 /* ErrorManager.swift in Sources */,
 				B623DD0C2BE50F5400627D39 /* MusicListRepositoryProtocol.swift in Sources */,
 				B623DD212BE5407200627D39 /* UIAppplication+keyWindow.swift in Sources */,
 				B623DD1F2BE5401700627D39 /* LoadingManager.swift in Sources */,
+				B63805662BE74C6F00157A30 /* AppLabel.swift in Sources */,
+				B638056C2BE752E500157A30 /* ResourcePath.swift in Sources */,
 				B623DCBD2BE4FA7000627D39 /* AppDelegate.swift in Sources */,
 				B6469D2F2BE555FC005DD431 /* MusicPlayerView.swift in Sources */,
 				B623DCBF2BE4FA7000627D39 /* SceneDelegate.swift in Sources */,
@@ -589,6 +620,7 @@
 				B623DD0A2BE50E1100627D39 /* MusicListRepository.swift in Sources */,
 				B623DCFA2BE507D700627D39 /* MusicResponse.swift in Sources */,
 				B623DD0E2BE5129800627D39 /* MusicTableViewCell.swift in Sources */,
+				B638056A2BE74FF800157A30 /* ColorPath.swift in Sources */,
 				B623DD082BE50CE200627D39 /* Music.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

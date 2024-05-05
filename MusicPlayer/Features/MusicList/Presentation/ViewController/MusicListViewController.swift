@@ -22,7 +22,7 @@ class MusicListViewController: UIViewController {
         label.textColor = UIColor.gray
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "No songs searched yet or no match for current song name. Please try to fill the search bar with another song name"
+        label.text = AppLabel.noSongsFound
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -63,8 +63,8 @@ class MusicListViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: musicPlayerView.topAnchor),
             
             informationLabel.topAnchor.constraint(equalTo: view.topAnchor),
-            informationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            informationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            informationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Decimal.double20),
+            informationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Decimal.double20),
             informationLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
@@ -72,20 +72,20 @@ class MusicListViewController: UIViewController {
     }
     
     fileprivate func initNavBar() {
-        self.navigationItem.title = "Songs"
+        self.navigationItem.title = AppLabel.musicListNavTitle
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Find Songs"
+        self.searchController.searchBar.placeholder = AppLabel.searchSongPlaceholder
     }
     
     fileprivate func updateTableView(with musicList: [Music]) {
         self.musicList = musicList
         tableView.reloadData()
         if musicList.isEmpty {
-            informationLabel.text = "No songs searched yet or no match for current song name. Please try to fill the search bar with another song name"
+            informationLabel.text = AppLabel.noSongsFound
             self.showLabelAndHideTable()
         } else {
             self.showTableAndHideLabel()
@@ -148,9 +148,9 @@ extension MusicListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.config(self.musicList[indexPath.row])
         
         if self.musicList[indexPath.row] == musicPlayerView.music{
-            cell.playingIndicatorLabel.isHidden = false
+            cell.isPlaying = true
         } else {
-            cell.playingIndicatorLabel.isHidden = true
+            cell.isPlaying = false
         }
         
         return cell
