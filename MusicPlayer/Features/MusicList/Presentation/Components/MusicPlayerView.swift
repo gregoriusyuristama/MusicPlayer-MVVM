@@ -7,12 +7,14 @@
 
 import UIKit
 import CoreMedia
+import Combine
 
 class MusicPlayerView: UIView {
     
     var music: Music?
     var audioPlayerDelegate: AudioPlayerDelegate?
     private var timeObserver: Any?
+    private var cancellables = Set<AnyCancellable>()
     
     lazy var playPauseButton: UIButton = {
         let button = UIButton()
@@ -77,10 +79,6 @@ class MusicPlayerView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initView()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemNewAccessLogEntry, object: AudioPlayerManager.shared.player?.currentItem)
     }
     
     private func initView() {
@@ -157,7 +155,17 @@ class MusicPlayerView: UIView {
         }
         songNameLabel.text = music.songName
         artistNameLabel.text = music.artistName
-        NotificationCenter.default.addObserver(self, selector: #selector(playerItemReadyToPlay), name: .AVPlayerItemNewAccessLogEntry, object: AudioPlayerManager.shared.player?.currentItem)
+        
+        AudioPlayerManager.shared.player?.currentItem?.publisher(for: \.status)
+            .sink { [weak self] status in
+                switch status {
+                case .readyToPlay:
+                    self?.playerItemReadyToPlay()
+                default:
+                    break
+                }
+            }
+            .store(in: &cancellables)
 
     }
     
