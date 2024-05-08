@@ -18,7 +18,7 @@ class MusicPlayerView: UIView {
     
     lazy var playPauseButton: UIButton = {
         let button = UIButton()
-        button.setImage(ButtonImageComponent.pauseButtonImage(), for: .normal)
+        button.setImage(ButtonImageComponent.playButtonImage(), for: .normal)
         button.addTarget(self, action: #selector(playPauseButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
